@@ -37,13 +37,13 @@ export default {
   },
   computed: {
     choices() {
-      return this.$store.state.choices;
+      return this.$store.getters.choices;
     },
     showResult() {
-      return this.$store.state.showResult;
+      return this.$store.getters.showResult;
     },
     isUserWinner() {
-      return this.$store.state.isUserWinner;
+      return this.$store.getters.isUserWinner;
     },
   },
   methods: {
