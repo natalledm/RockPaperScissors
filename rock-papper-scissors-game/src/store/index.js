@@ -12,6 +12,12 @@ export default new Vuex.Store({
     showResult: false,
   },
   mutations: {
+    setUserChoice(state, userChoice) {
+      state.userChoice = userChoice;
+    },
+    setComputerChoice(state, computerChoice) {
+      state.computerChoice = computerChoice;
+    },
     setIsUserWinner(state, choices) {
       let isUserWinner;
       if (choices.userChoice === 'rock'
@@ -30,16 +36,20 @@ export default new Vuex.Store({
       }
       state.isUserWinner = isUserWinner;
     },
+    setResult(state, bool) {
+      state.showResult = bool;
+    },
   },
   actions: {
     playGame({ commit, state }, userSelection) {
+      commit('setResult', false);
       const computerChoice = state.choices[Math.floor(Math.random()
         * state.choices.length)];
       const userChoice = userSelection;
-      console.log(userChoice, computerChoice, state.isUserWinner);
+      commit('setUserChoice', userChoice);
+      commit('setComputerChoice', computerChoice);
       commit('setIsUserWinner', { computerChoice, userChoice });
-      // this.checkWinner();
-      // this.showResult = !this.showResult;
+      commit('setResult', true);
     },
   },
   modules: {
